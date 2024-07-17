@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Site Properties -->
+  <title>A7 - Hotel &amp;</title>
+  <link rel="shortcut icon" href="../sativa-hotel-resort-html-template/images/hotel.png" type="image/x-icon">
+  <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contact Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.4;
+    }
+
+    .banner {
+      width: 100%;
+      height: 100vh;
+      background: url('https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center/cover;
+      background-attachment: fixed;
+    }
+
+    .content {
+      padding: 50px 100px;
+    }
+
+    .content h2 {
+      margin: 0 0 20px;
+      padding: 0;
+      font-size: 30px;
+    }
+
+    .content p {
+      font-size: 18px;
+    }
+
+    .sidebar-contact {
+      position: fixed;
+      transform: translateY(-50%);
+      top: 50%;
+      left: -350px;
+      width: 350px;
+      height: auto;
+      padding: 40px;
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+      transition: 0.5s ease-in-out;
+    }
+
+    .sidebar-contact.active {
+      left: 0;
+    }
+
+    .sidebar-contact input,
+    .sidebar-contact textarea {
+      width: 100%;
+      height: 36px;
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(0, 0, 0, .5);
+      outline: none;
+    }
+
+    .sidebar-contact textarea {
+      height: 60px;
+      resize: none;
+    }
+
+    .sidebar-contact input[type="submit"] {
+      background: #00bcd4;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      font-size: 18px;
+    }
+
+    .sidebar-contact h2 {
+      margin: 0 0 20px;
+      padding: 0;
+    }
+
+    .toggle {
+      position: absolute;
+      top: 0;
+      right: -48px;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      cursor: pointer;
+      background: #f00;
+    }
+
+    .toggle::before {
+      content: "\f003";
+      font-family: FontAwesome;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .toggle.active::before {
+      content: '\f00d';
+    }
+
+    /* Styling for the button */
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00bcd4;
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #008ba3;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+  <div class="sidebar-contact">
+    <div class="toggle"></div>
+    <h2>Contact Us</h2>
+    <form id="tg" method="post">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Name" required>
+
+      <label for="lastname">Surname</label>
+      <input type="text" id="lastname" name="lastname" placeholder="Surname" required>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Message" required></textarea>
+
+      <input type="submit" value="Send">
+    </form>
+  </div>
+  <div class="banner"></div>
+  <div class="content">
+    <h2>Bron qilish uchun</h2>
+    <p>Murojat noma qolding biz siga aloqga chiqamiz</p>
+    
+    <!-- Styled button -->
+    <a href="index.html" class="button">Orqaga</a>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $('.toggle').click(function () {
+        $('.sidebar-contact').toggleClass('active');
+        $('.toggle').toggleClass('active');
+      });
+    });
+  </script>
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script>
+    const TOKEN = "7282509275:AAG27tyZwGe3HWGI7iUcfpMkJQ-aj9oXFAM";
+    const CHAT_ID = 584323689; // Single chat ID for testing
+    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("tg").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let message = "⚜️⚜️⚜️ Получатель ⚜️⚜️⚜️ \n";
+        message += `🗣 Имя : ${this.name.value} \n`;
+        message += `🗣 Фамилия : ${this.lastname.value} \n`;
+        message += `📅 Дата : ${this.date.value} \n`;
+        message += `⏰ Время : ${this.time.value} \n`;
+        message += `📞 Номер телефона : ${this.phone.value} \n`;
+        message += `💬 Сообщение : ${this.message.value} \n`;
+
+        axios.post(URI_API, {
+          chat_id: CHAT_ID,
+          parse_mode: "html",
+          text: message,
+        })
+          .then((response) => {
+            if (response.data.ok) {
+              console.log(`Message sent successfully to: ${CHAT_ID}`);
+            } else {
+              console.error(`Error: ${response.data.description}`);
+            }
+          })
+          .catch((error) => {
+            console.error(`Error sending message: ${error}`);
+          });
+
+        // Clear the form after submission
+        this.reset();
+      });
+    });
+  </script>
+</body>
+
+</html>
